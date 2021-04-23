@@ -1,21 +1,16 @@
-from django.db import models
-from django.db.models.fields.json import JSONField
+from mongoengine import Document, EmbeddedDocument, fields
 
-# Create your models here.
+class ToolInput(EmbeddedDocument):
+    name = fields.StringField(required=True)
+    value = fields.DynamicField(required=True)
 
-class Tool(models.Model):
-  label = models.CharField(max_length=1024, null=True, blank=True)
-  description = models.TextField(null=True, blank=True)
+    def __str__(self):
+      return self.name
 
-class ToolInput(models.Model):
-  tool = models.ForeignKey(
-    Tool,
-    related_name="inputs",
-    on_delete= models.CASCADE
-  )
-  name = models.CharField(
-    max_length=1024,
-    null=True,
-    blank=True
-  )
-  value = JSONField(null=True, blank=True)
+class Tool(Document):
+    label = fields.StringField(required=True)
+    description = fields.StringField(required=True, null=True)
+    inputs = fields.ListField(fields.EmbeddedDocumentField(ToolInput))
+
+    def __str__(self):
+      return self.label

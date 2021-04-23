@@ -24,5 +24,5 @@ router.register(r'tool', ToolViewSet, r'tool')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api', include(router.urls)),
+    path('api/', include(router.urls)),
 ]

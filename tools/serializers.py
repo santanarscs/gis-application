@@ -1,13 +1,8 @@
-from rest_framework import serializers
+from rest_framework_mongoengine import serializers
 from .models import ToolInput, Tool
-class ToolInputSerializer(serializers.HyperlinkedModelSerializer):
-  class Meta:
-    model = ToolInput
-    fields = '__all__'
 
-class ToolsSerializer(serializers.HyperlinkedModelSerializer):
-  inputs = ToolInputSerializer(many=True)
 
+class ToolsSerializer(serializers.DocumentSerializer):
   class Meta:
     model = Tool
-    fields = ('label', 'description', 'inputs')
+    fields = '__all__'
