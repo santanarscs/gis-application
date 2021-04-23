@@ -10,6 +10,7 @@ class ToolInput(EmbeddedDocument):
 class Tool(Document):
     label = fields.StringField(required=True)
     description = fields.StringField(required=True, null=True)
+    level = fields.IntField(required=True)
     inputs = fields.ListField(fields.EmbeddedDocumentField(ToolInput))
 
     def __str__(self):

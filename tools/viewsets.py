@@ -7,7 +7,7 @@ from .serializers import  ToolsSerializer
 
 class ToolViewSet(viewsets.ModelViewSet):
   '''
-    Contem informação sobre command line
+    Contem informação sobre ferramentas
   '''
   lookup_field = 'id'
   serializer_class = ToolsSerializer
